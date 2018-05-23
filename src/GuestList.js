@@ -9,7 +9,8 @@ class GuestList extends Component {
     guests: PropTypes.arrayOf(GuestType).isRequired,
     toggleConfirmationAt: PropTypes.func.isRequired,
     toggleEditingAt: PropTypes.func.isRequired,
-    setNameAt: PropTypes.func.isRequired
+    setNameAt: PropTypes.func.isRequired,
+    isFiltered: PropTypes.bool.isRequired
   };
 
   // The reason for not having an arrow function in render is because every time
@@ -24,15 +25,18 @@ class GuestList extends Component {
       <ul>
         {this.props.guests.map((guest, index) =>
           // TODO: better key than index
-          <Guest
-            key={index}
-            name={guest.name}
-            isConfirmed={guest.isConfirmed}
-            isEditing={guest.isEditing}
-            handleConfirmation={this.toggleConfirmationAt(index)}
-            handleToggleEditing={this.toggleEditingAt(index)}
-            setName={this.setNameAt(index)}
-          />
+          this.props.isFiltered && !guest.isConfirmed ?
+            null
+            :
+            <Guest
+              key={index}
+              name={guest.name}
+              isConfirmed={guest.isConfirmed}
+              isEditing={guest.isEditing}
+              handleConfirmation={this.toggleConfirmationAt(index)}
+              handleToggleEditing={this.toggleEditingAt(index)}
+              setName={this.setNameAt(index)}
+            />
         )}
       </ul>
     );
