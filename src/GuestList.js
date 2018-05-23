@@ -5,44 +5,38 @@ import Guest from "./Guest";
 
 class GuestList extends Component {
 
+  static propTypes = {
+    guests: PropTypes.arrayOf(GuestType).isRequired,
+    toggleConfirmationAt: PropTypes.func.isRequired,
+    toggleEditingAt: PropTypes.func.isRequired,
+    setNameAt: PropTypes.func.isRequired
+  };
+
+  // The reason for not having an arrow function in render is because every time
+  // render is rerun (like on a state change) react has to recreate the arrow fn
+  // which is really inefficient. This can be solved by pre-creating the arrow fn.
   toggleConfirmationAt = index => () => this.props.toggleConfirmationAt(index);
+  toggleEditingAt = index => () => this.props.toggleEditingAt(index);
+  setNameAt = index => text => this.props.setNameAt(index, text);
 
   render() {
     return (
       <ul>
-        {/*<li className="pending"><span>Safia</span></li>*/}
-        {/*<li className="responded"><span>Iver</span>*/}
-        {/*<label>*/}
-        {/*<input type="checkbox" checked /> Confirmed*/}
-        {/*</label>*/}
-        {/*<button>edit</button>*/}
-        {/*<button>remove</button>*/}
-        {/*</li>*/}
-        {/*<li className="responded">*/}
-        {/*<span>Corrina</span>*/}
-        {/*<label>*/}
-        {/*<input type="checkbox" checked /> Confirmed*/}
-        {/*</label>*/}
-        {/*<button>edit</button>*/}
-        {/*<button>remove</button>*/}
-        {/*</li>*/}
         {this.props.guests.map((guest, index) =>
           // TODO: better key than index
           <Guest
             key={index}
             name={guest.name}
             isConfirmed={guest.isConfirmed}
+            isEditing={guest.isEditing}
             handleConfirmation={this.toggleConfirmationAt(index)}
+            handleToggleEditing={this.toggleEditingAt(index)}
+            setName={this.setNameAt(index)}
           />
         )}
       </ul>
     );
   }
 }
-
-GuestList.propsTypes = {
-  guests: PropTypes.arrayOf(GuestType).isRequired,
-  toggleConfirmationAt: PropTypes.func.isRequired
-};
 
 export default GuestList;
