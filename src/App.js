@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import GuestList from "./GuestList";
 import Counter from "./Counter";
+import Header from "./Header";
 
 class App extends Component {
 
@@ -58,12 +59,10 @@ class App extends Component {
       isFiltered: !this.state.isFiltered
     });
 
-  handleNameInput = event =>
-    this.setState({ pendingGuest: event.target.value });
+  handleNameChange = name =>
+    this.setState({ pendingGuest: name });
 
-  newGuestSubmitHandler = event => {
-    event.preventDefault();
-
+  handleNewGuest = () =>
     this.setState({
       guests: [
         {
@@ -75,7 +74,6 @@ class App extends Component {
       ],
       pendingGuest: ''
     });
-  };
 
   getTotalInvited = () => this.state.guests.length;
   getAttendingGuests = () =>
@@ -89,25 +87,11 @@ class App extends Component {
     console.log(this.getAttendingGuests());
     return (
       <div className="App">
-        <header>
-          <h1>RSVP</h1>
-          <p>A Treehouse App</p>
-          <form>
-            <input
-              type="text"
-              value={this.state.pendingGuest}
-              placeholder="Invite Someone"
-              onChange={this.handleNameInput}
-            />
-            <button
-              type="submit"
-              name="submit"
-              value="submit"
-              onClick={this.newGuestSubmitHandler}
-            >Submit
-            </button>
-          </form>
-        </header>
+        <Header
+          pendingGuest={this.state.pendingGuest}
+          handleNameChange={this.handleNameChange}
+          handleNewGuest={this.handleNewGuest}
+        />
         <div className="main">
           <div>
             <h2>Invitees</h2>
