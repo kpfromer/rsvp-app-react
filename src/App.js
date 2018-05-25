@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import GuestList from "./GuestList";
-import Counter from "./Counter";
-import Header from "./Header";
-import ConfirmedFilter from "./ConfirmedFilter";
-import MainContent from "./MainContent";
+import Header from "./Header/Header";
+import MainContent from "./MainContent/MainContent";
 
 class App extends Component {
 

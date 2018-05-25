@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Counter from "./Counter";
-import GuestList from "./GuestList";
+import GuestList from "./GuestList/GuestList";
 import ConfirmedFilter from "./ConfirmedFilter";
-import { GuestType } from "./GuestType";
+import { GuestType } from "./GuestList/GuestType";
 
 class MainContent extends Component {
 
