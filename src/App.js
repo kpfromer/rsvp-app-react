@@ -6,6 +6,7 @@ class App extends Component {
 
   state = {
     isFiltered: false,
+    pendingGuest: '',
     guests: [
       {
         name: 'Treasure',
@@ -47,6 +48,28 @@ class App extends Component {
       isFiltered: !this.state.isFiltered
     });
 
+  handleNameInput = event =>
+    this.setState({ pendingGuest: event.target.value });
+
+  newGuestSubmitHandler = event => {
+    event.preventDefault();
+
+    this.setState({
+      guests: [
+        {
+          name: this.state.pendingGuest,
+          isConfirmed: false,
+          isEditing: false
+        },
+        ...this.state.guests
+      ],
+      pendingGuest: ''
+    });
+  };
+  // this.setState(prevState => {
+  //   prevState.guests.push()
+  // });
+
   getTotalInvited = () => this.state.guests.length;
   getAttendingGuests = () => this.state.guests.filter(guest => guest.isConfirmed);
   getUnconfirmedGuest = () => this.state.guests.filter(guest => !guest.isConfirmed);
@@ -58,8 +81,19 @@ class App extends Component {
           <h1>RSVP</h1>
           <p>A Treehouse App</p>
           <form>
-            <input type="text" value="Safia" placeholder="Invite Someone" />
-              <button type="submit" name="submit" value="submit">Submit</button>
+            <input
+              type="text"
+              value={this.state.pendingGuest}
+              placeholder="Invite Someone"
+              onChange={this.handleNameInput}
+            />
+            <button
+              type="submit"
+              name="submit"
+              value="submit"
+              onClick={this.newGuestSubmitHandler}
+            >Submit
+            </button>
           </form>
         </header>
         <div className="main">
@@ -68,7 +102,7 @@ class App extends Component {
             <label>
               <input type="checkbox"
                      value={this.state.isFiltered}
-                     onChange={this.toggleFilter} /> Hide those who haven't responded
+                     onChange={this.toggleFilter}/> Hide those who haven't responded
             </label>
           </div>
           <table className="counter">
