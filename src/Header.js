@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import GuestInputForm from "./GuestInputForm";
 
 class Header extends Component {
 
@@ -9,34 +10,16 @@ class Header extends Component {
     handleNewGuest: PropTypes.func.isRequired
   };
 
-  handleNameInput = event =>
-    this.props.handleNameChange(event.target.value);
-
-  handleNewGuest = event => {
-    event.preventDefault();
-    this.props.handleNewGuest();
-  };
-
   render() {
     return (
       <header>
         <h1>RSVP</h1>
         <p>A Treehouse App</p>
-        <form>
-          <input
-            type="text"
-            value={this.props.pendingGuest}
-            placeholder="Invite Someone"
-            onChange={this.handleNameInput}
-          />
-          <button
-            type="submit"
-            name="submit"
-            value="submit"
-            onClick={this.handleNewGuest}
-          >Submit
-          </button>
-        </form>
+        <GuestInputForm
+          pendingGuest={this.props.pendingGuest}
+          handleNameChange={this.props.handleNameChange}
+          handleNewGuest={this.props.handleNewGuest}
+        />
       </header>
     );
   }
