@@ -10,6 +10,7 @@ class GuestList extends Component {
     toggleConfirmationAt: PropTypes.func.isRequired,
     toggleEditingAt: PropTypes.func.isRequired,
     setNameAt: PropTypes.func.isRequired,
+    removeGuestAt: PropTypes.func.isRequired,
     isFiltered: PropTypes.bool.isRequired
   };
 
@@ -19,6 +20,7 @@ class GuestList extends Component {
   toggleConfirmationAt = index => () => this.props.toggleConfirmationAt(index);
   toggleEditingAt = index => () => this.props.toggleEditingAt(index);
   setNameAt = index => text => this.props.setNameAt(index, text);
+  removeGuestAt = index => () => this.props.removeGuestAt(index);
 
   render() {
     return (
@@ -35,6 +37,7 @@ class GuestList extends Component {
               isEditing={guest.isEditing}
               handleConfirmation={this.toggleConfirmationAt(index)}
               handleToggleEditing={this.toggleEditingAt(index)}
+              handleRemove={this.removeGuestAt(index)}
               setName={this.setNameAt(index)}
             />
         )}

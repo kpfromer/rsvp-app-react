@@ -10,7 +10,8 @@ class Guest extends Component {
     isEditing: PropTypes.bool.isRequired,
     handleConfirmation: PropTypes.func.isRequired,
     handleToggleEditing: PropTypes.func.isRequired,
-    setName: PropTypes.func.isRequired
+    setName: PropTypes.func.isRequired,
+    handleRemove: PropTypes.func.isRequired
   };
 
   setName = event => this.props.setName(event.target.value);
@@ -34,7 +35,7 @@ class Guest extends Component {
               'edit'
           }
         </button>
-        <button>remove</button>
+        <button onClick={this.props.handleRemove}>remove</button>
       </li>
     );
   }
