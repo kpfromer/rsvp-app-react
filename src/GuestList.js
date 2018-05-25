@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { GuestType } from "./GuestType";
 import Guest from "./Guest";
+import PendingGuest from "./PendingGuest";
 
 class GuestList extends Component {
 
@@ -11,7 +12,8 @@ class GuestList extends Component {
     toggleEditingAt: PropTypes.func.isRequired,
     setNameAt: PropTypes.func.isRequired,
     removeGuestAt: PropTypes.func.isRequired,
-    isFiltered: PropTypes.bool.isRequired
+    isFiltered: PropTypes.bool.isRequired,
+    pendingGuest: PropTypes.string.isRequired
   };
 
   // The reason for not having an arrow function in render is because every time
@@ -25,6 +27,7 @@ class GuestList extends Component {
   render() {
     return (
       <ul>
+        <PendingGuest name={this.props.pendingGuest}/>
         {this.props.guests.map((guest, index) =>
           // TODO: better key than index
           this.props.isFiltered && !guest.isConfirmed ?

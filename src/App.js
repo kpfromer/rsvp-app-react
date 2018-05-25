@@ -75,9 +75,6 @@ class App extends Component {
       pendingGuest: ''
     });
   };
-  // this.setState(prevState => {
-  //   prevState.guests.push()
-  // });
 
   getTotalInvited = () => this.state.guests.length;
   getAttendingGuests = () => this.state.guests.filter(guest => guest.isConfirmed);
@@ -137,6 +134,7 @@ class App extends Component {
             setNameAt={this.setNameAt}
             removeGuestAt={this.removeGuestAt}
             isFiltered={this.state.isFiltered}
+            pendingGuest={this.state.pendingGuest}
           />
         </div>
       </div>
